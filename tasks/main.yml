@@ -1,0 +1,63 @@
+---
+  - name: Include OS-specific variables.
+    include_vars: "{{ item }}"
+    tags:
+      - sysutils-nut
+      - update
+    with_first_found:
+      - files:
+        - "{{ ansible_os_family }}.yml"
+      - path:
+        - "vars"
+      - skip: true
+
+  - name: install required packages
+    package:
+      name: "{{ item }}"
+      state: "present"
+    ignore_errors: yes
+    notify: enable nut
+    with_items: "{{ sysutils_nut_packages }}"
+    tags:
+      - sysutils-nut
+      - update
+
+  - name: Include OS-specific tasks.
+    include_tasks: "{{ item }}"
+    tags:
+      - sysutils-nut
+      - update
+    with_first_found:
+      - files:
+        - "{{ ansible_os_family }}.yml"
+      - path:
+        - "."
+      - skip: true
+
+  - name: execute pre nut configuration tasks
+    include_tasks: "{{ sysutils_nut_pre_include }}"
+    when: sysutils_nut_pre_include is defined
+    tags:
+      - sysutils-nut
+      - update
+
+  - name: copy nut configuration files
+    template:
+      src: "{{ item }}"
+      dest: "{{ sysutils_nut_ups_conf_dest }}/{{ item | basename | regex_replace('.j2','') }}"
+      backup: "yes"
+      owner: "{{ sysutils_nut_username }}"
+      group: "{{ sysutils_nut_usb_daemon_group }}"
+      mode: "0640"
+    notify: restart nut
+    tags:
+      - sysutils-nut
+      - update
+    with_items: "{{ sysutils_nut_ups_conf_src }}"
+
+  - name: execute post nut configuration tasks
+    include_tasks: "{{ sysutils_nut_post_include }}"
+    when: sysutils_nut_post_include is defined
+    tags:
+      - sysutils-nut
+      - update

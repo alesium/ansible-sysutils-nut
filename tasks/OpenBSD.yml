@@ -1,0 +1,13 @@
+---
+  - name: add nut user to deamon group
+    user: name="{{ sysutils_nut_username }}" groups="{{ sysutils_nut_openbsd_daemon_group }}"
+
+  - name: Find usb and ugen devices
+    shell: ls /dev/{usb*,ugen*}
+    register: sysutils_nut_openbsd_usb_devices
+
+  - name: make sure deamon owns /dev/usb related
+    file:
+      group: "{{ sysutils_nut_openbsd_daemon_group }}"
+      name: "{{ item }}"
+    with_items: "{{ sysutils_nut_openbsd_usb_devices.stdout_lines }}"

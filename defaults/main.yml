@@ -1,0 +1,32 @@
+---
+sysutils_nut_packages:
+  - nut
+sysutils_nut_ups_conf_src:
+  - ups.conf.j2
+  - upsd.conf.j2
+  - upsd.users.j2
+  - upsmon.conf.j2
+sysutils_nut_ups_conf_dest: "/etc/nut"
+sysutils_nut_username: "_nut"
+sysutils_nut_group: "_nut"
+sysutils_nut_usb_daemon_group: "daemon"
+sysutils_nut_admin_password: "secretpassword"
+sysutils_nut_monuser_password: "secretpassword"
+sysutils_nut_service:
+  - upsd
+  - upsmon
+
+#sysutils_nut_pre_include: "../path/to.yaml"
+#sysutils_nut_post_include: "../path/to.yaml"
+
+sysutils_nut_ups_list:
+  - ups:
+    name: "name"
+    driver: "driver"
+    port: "auto"
+    vendorid: "vendorId"
+    productid: "productId"
+    product: "modelName"
+    serial: "serialNumber"
+    vendor: "vendorName"
+    bus: "bus"

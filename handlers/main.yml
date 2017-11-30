@@ -1,0 +1,12 @@
+---
+  - name: enable and start upsd and upsmon
+    service:
+      name: "{{ item }}"
+      enabled: "yes"
+    with_items: "{{ sysutils_nut_service }}"
+
+  - name: restart nut
+    service:
+      name: "{{ item }}"
+      state: "restarted"
+    with_items: "{{ sysutils_nut_service }}"

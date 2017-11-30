@@ -1,0 +1,15 @@
+###
+# ups.conf.j2 content
+# {{ ansible_managed }}
+###
+{% for ups in sysutils_nut_ups_list %}
+[{{ ups.name }}]
+        driver = {{ ups.driver }}
+        port = {{ ups.port }}
+        vendorid = {{ ups.vendorid }}
+        productid = {{ ups.productid }}
+        product = {{ ups.product }}
+        serial = {{ ups.serial }}
+        vendor = {{ ups.vendor }}
+        bus = {{ ups.bus }}
+{% endfor %}
