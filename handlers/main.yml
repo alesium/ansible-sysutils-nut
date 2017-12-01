@@ -1,5 +1,5 @@
 ---
-  - name: enable and start upsd and upsmon
+  - name: enable nut
     service:
       name: "{{ item }}"
       enabled: "yes"
