@@ -6,10 +6,23 @@
 [{{ ups.name }}]
         driver = {{ ups.driver }}
         port = {{ ups.port }}
+        desc = {{ ups.desc | default('default description') }}
+	{% if ups.vendorid is defined %}
         vendorid = {{ ups.vendorid }}
+	{%endif%}
+	{% if ups.productid is defined %}
         productid = {{ ups.productid }}
+	{%endif%}
+	{% if ups.product is defined %}
         product = {{ ups.product }}
+	{%endif%}
+	{% if ups.serial is defined %}
         serial = {{ ups.serial }}
+	{%endif%}
+	{% if ups.vendor is defined %}
         vendor = {{ ups.vendor }}
+	{%endif%}
+	{% if ups.bus is defined %}
         bus = {{ ups.bus }}
+	{%endif%}
 {% endfor %}
