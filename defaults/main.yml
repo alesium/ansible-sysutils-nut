@@ -7,8 +7,8 @@ sysutils_nut_ups_conf_src:
   - upsd.users.j2
   - upsmon.conf.j2
 sysutils_nut_ups_conf_dest: "/etc/nut"
-sysutils_nut_username: "_nut"
-sysutils_nut_group: "_nut"
+sysutils_nut_username: "_ups"
+sysutils_nut_group: "_ups"
 sysutils_nut_usb_daemon_group: "daemon"
 sysutils_nut_admin_password: "secretpassword"
 sysutils_nut_monuser_password: "secretpassword"

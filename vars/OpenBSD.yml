@@ -1,4 +1,4 @@
 ---
-sysutils_nut_username: "_nut"
-sysutils_nut_group: "_nut"
+sysutils_nut_username: "_ups"
+sysutils_nut_group: "_ups"
 sysutils_nut_openbsd_daemon_group: "daemon"
