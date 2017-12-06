@@ -1,6 +1,6 @@
 ---
   - name: Include OS-specific variables.
-    include_vars: "{{ item }}"
+    include_vars: "{{ include_var_file }}"
     tags:
       - sysutils-nut
       - update
@@ -10,6 +10,8 @@
       - path:
         - "vars"
       - skip: true
+    loop_control:
+      loop_var: include_var_file
 
   - name: install required packages
     package:
